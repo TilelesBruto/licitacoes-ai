@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { path: "/", label: "Dashboard", icon: LayoutDashboard },
+  { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/inbox", label: "Inbox de Editais", icon: Inbox },
   { path: "/analisador", label: "Analisador de Edital", icon: ScanSearch },
   { path: "/certidoes", label: "Minhas Certidões", icon: ShieldCheck },
