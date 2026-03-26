@@ -5,9 +5,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
-import Scanner from "./pages/Scanner";
-import Prazos from "./pages/Prazos";
-import Documentos from "./pages/Documentos";
+import Inbox from "./pages/Inbox";
+import Analisador from "./pages/Analisador";
+import Certidoes from "./pages/Certidoes";
+import RadarRiscos from "./pages/RadarRiscos";
+import Configuracoes from "./pages/Configuracoes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,9 +23,11 @@ const App = () => (
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/scanner" element={<Scanner />} />
-            <Route path="/prazos" element={<Prazos />} />
-            <Route path="/documentos" element={<Documentos />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/analisador" element={<Analisador />} />
+            <Route path="/certidoes" element={<Certidoes />} />
+            <Route path="/radar" element={<RadarRiscos />} />
+            <Route path="/configuracoes" element={<Configuracoes />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

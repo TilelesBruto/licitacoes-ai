@@ -3,20 +3,23 @@ import { NavLink, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   ScanSearch,
-  CalendarClock,
-  FileCheck2,
-  MessageSquare,
+  ShieldCheck,
+  Radar,
+  Settings,
   ChevronLeft,
   ChevronRight,
   Zap,
+  Inbox,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { path: "/", label: "Dashboard", icon: LayoutDashboard },
-  { path: "/scanner", label: "Scanner de Edital", icon: ScanSearch },
-  { path: "/prazos", label: "Gestão de Prazos", icon: CalendarClock },
-  { path: "/documentos", label: "Gerador de Docs", icon: FileCheck2 },
+  { path: "/inbox", label: "Inbox de Editais", icon: Inbox },
+  { path: "/analisador", label: "Analisador de Edital", icon: ScanSearch },
+  { path: "/certidoes", label: "Minhas Certidões", icon: ShieldCheck },
+  { path: "/radar", label: "Radar de Oportunidades", icon: Radar },
+  { path: "/configuracoes", label: "Configurações", icon: Settings },
 ];
 
 export default function AppSidebar() {
@@ -26,7 +29,7 @@ export default function AppSidebar() {
   return (
     <aside
       className={cn(
-        "flex flex-col h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300",
+        "flex flex-col h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300 shrink-0",
         collapsed ? "w-16" : "w-60"
       )}
     >
@@ -37,7 +40,7 @@ export default function AppSidebar() {
         </div>
         {!collapsed && (
           <span className="text-sm font-semibold text-foreground tracking-tight">
-            LicitFlow AI
+            Detail Licitações
           </span>
         )}
       </div>
