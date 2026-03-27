@@ -14,8 +14,11 @@ import {
   Target,
   TrendingUp,
   BarChart3,
+  Building2,
+  Calculator,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 type RiskLevel = "green" | "yellow" | "red";
@@ -23,11 +26,13 @@ type RiskLevel = "green" | "yellow" | "red";
 interface AnalysisResult {
   objeto: string;
   valorEstimado: string;
+  valorNumerico: number;
   dataSessao: string;
   criterioJulgamento: string;
   modalidade: string;
   liquidezCorrente: string;
   solvencia: string;
+  capitalSocialExigido: number; // percentage required
   riscos: { label: string; level: RiskLevel; detail: string }[];
   overallRisk: RiskLevel;
   checklist: { item: string; status: "possuo" | "pendente" }[];
@@ -36,11 +41,13 @@ interface AnalysisResult {
 const mockAnalysis: AnalysisResult = {
   objeto: "Contratação de empresa especializada para prestação de serviços de infraestrutura de TI, incluindo fornecimento de servidores, storage e switches de rede.",
   valorEstimado: "R$ 2.840.000,00",
+  valorNumerico: 2840000,
   dataSessao: "28/03/2025 às 09:00 (Horário de Brasília)",
   criterioJulgamento: "Menor Preço por Item",
   modalidade: "Pregão Eletrônico - Lei 14.133/2021",
   liquidezCorrente: "≥ 1,5",
   solvencia: "≥ 1,0",
+  capitalSocialExigido: 10,
   riscos: [
     { label: "Qualificação Técnica", level: "green", detail: "Exigências compatíveis com o objeto" },
     { label: "Garantia Contratual", level: "yellow", detail: "Exigência de 5% do valor" },
@@ -79,6 +86,8 @@ export default function Analisador() {
   const [stage, setStage] = useState<"upload" | "scanning" | "result">("upload");
   const [dragOver, setDragOver] = useState(false);
   const [fileName, setFileName] = useState("");
+  const [capitalSocial, setCapitalSocial] = useState("");
+  const [capitalChecked, setCapitalChecked] = useState(false);
 
   const handleFile = useCallback((name: string) => {
     setFileName(name);
@@ -103,6 +112,14 @@ export default function Analisador() {
     },
     [handleFile]
   );
+
+  // Capital Social calculation
+  const capitalNumerico = parseFloat(capitalSocial.replace(/[^\d]/g, "")) || 0;
+  const capitalExigido = (mockAnalysis.valorNumerico * mockAnalysis.capitalSocialExigido) / 100;
+  const capitalAtende = capitalNumerico >= capitalExigido;
+
+  const formatCurrency = (val: number) =>
+    val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
   return (
     <div className="p-6 lg:p-8 space-y-8">
@@ -164,6 +181,55 @@ export default function Analisador() {
               </div>
             </div>
 
+            {/* Capital Social Calculator */}
+            <div className="glass-card p-5">
+              <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                <Calculator className="w-4 h-4 text-primary" /> Verificação de Capital Social
+              </h3>
+              <p className="text-xs text-muted-foreground mb-3">
+                O edital exige capital social mínimo de <strong className="text-foreground">{mockAnalysis.capitalSocialExigido}%</strong> do valor estimado ({formatCurrency(capitalExigido)}).
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="flex-1 relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">R$</span>
+                  <Input
+                    placeholder="Informe seu Capital Social"
+                    value={capitalSocial}
+                    onChange={(e) => { setCapitalSocial(e.target.value); setCapitalChecked(true); }}
+                    className="pl-9 bg-secondary border-border text-sm"
+                  />
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCapitalChecked(true)}
+                  className="shrink-0 gap-1.5"
+                >
+                  <Calculator className="w-3.5 h-3.5" /> Verificar
+                </Button>
+              </div>
+              {capitalChecked && capitalSocial && (
+                <div className={cn(
+                  "mt-3 p-3 rounded-lg border text-sm flex items-center gap-2",
+                  capitalAtende
+                    ? "bg-accent/10 border-accent/20 text-accent"
+                    : "bg-destructive/10 border-destructive/20 text-destructive"
+                )}>
+                  {capitalAtende ? (
+                    <>
+                      <CheckCircle2 className="w-4 h-4 shrink-0" />
+                      <span>Seu capital social ({formatCurrency(capitalNumerico)}) <strong>atende</strong> à exigência de {formatCurrency(capitalExigido)}.</span>
+                    </>
+                  ) : (
+                    <>
+                      <XCircle className="w-4 h-4 shrink-0" />
+                      <span>Seu capital ({formatCurrency(capitalNumerico)}) <strong>não atende</strong>. Faltam {formatCurrency(capitalExigido - capitalNumerico)}.</span>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+
             {/* Risk Semaphore */}
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-3">Semáforo de Risco</h3>
@@ -183,12 +249,12 @@ export default function Analisador() {
               </div>
             </div>
 
-            <Button variant="outline" onClick={() => setStage("upload")} className="mt-4">
+            <Button variant="outline" onClick={() => { setStage("upload"); setCapitalSocial(""); setCapitalChecked(false); }} className="mt-4">
               <ScanSearch className="w-4 h-4 mr-1" /> Analisar outro edital
             </Button>
           </div>
 
-          {/* Side Panel - Extracted Data */}
+          {/* Side Panel */}
           <div className="w-80 shrink-0 space-y-4">
             <div className="glass-card p-4 space-y-4">
               <h3 className="text-sm font-semibold text-foreground border-b border-border pb-2">Dados Extraídos</h3>
@@ -196,6 +262,7 @@ export default function Analisador() {
               <InfoRow icon={DollarSign} label="Valor Estimado" value={mockAnalysis.valorEstimado} highlight />
               <InfoRow icon={Clock} label="Data da Sessão" value={mockAnalysis.dataSessao} />
               <InfoRow icon={Scale} label="Critério" value={mockAnalysis.criterioJulgamento} />
+              <InfoRow icon={Building2} label="Modalidade" value={mockAnalysis.modalidade} />
             </div>
 
             <div className="glass-card p-4 space-y-3">
@@ -209,6 +276,10 @@ export default function Analisador() {
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Solvência</span>
                 <span className="text-foreground font-medium">{mockAnalysis.solvencia}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Capital Social Exigido</span>
+                <span className="text-foreground font-medium">{mockAnalysis.capitalSocialExigido}%</span>
               </div>
             </div>
 
