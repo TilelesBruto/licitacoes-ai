@@ -25,7 +25,14 @@ interface Edital {
   status: "novo" | "lido" | "favorito";
   risk: "green" | "yellow" | "red";
   portal: Portal;
+  url: string;
 }
+
+const portalUrls: Record<string, string> = {
+  comprasgov: "https://www.gov.br/compras",
+  bll: "https://bll.org.br",
+  comprassp: "https://www.bec.sp.gov.br",
+};
 
 const portals: { key: Portal; label: string }[] = [
   { key: "todos", label: "Todos" },
