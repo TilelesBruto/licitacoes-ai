@@ -164,7 +164,7 @@ export default function Inbox() {
             </div>
 
             <div className="flex flex-col items-center gap-2 shrink-0">
-              <button onClick={() => toggleFav(e.id)} className="text-muted-foreground hover:text-warning transition-colors">
+              <button onClick={(ev) => { ev.stopPropagation(); toggleFav(e.id); }} className="text-muted-foreground hover:text-warning transition-colors">
                 {e.status === "favorito" ? <Star className="w-4 h-4 text-warning fill-warning" /> : <StarOff className="w-4 h-4" />}
               </button>
               <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
