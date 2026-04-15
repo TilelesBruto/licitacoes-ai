@@ -126,6 +126,7 @@ export default function Inbox() {
         {filtered.map((e) => (
           <div
             key={e.id}
+            onClick={() => window.open(e.url, "_blank", "noopener,noreferrer")}
             className={cn(
               "glass-card p-4 flex items-start gap-4 hover:border-primary/30 transition-colors cursor-pointer group",
               e.status === "novo" && "border-l-2 border-l-primary"
