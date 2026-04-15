@@ -54,13 +54,13 @@ const portalLabel: Record<string, string> = {
 };
 
 const editais: Edital[] = [
-  { id: "PE 045/2025", org: "Ministério da Saúde", object: "Aquisição de equipamentos de TI - Servidores e Storage", value: "R$ 2.800.000", deadline: "28 Mar 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "green", portal: "comprasgov" },
-  { id: "PE 038/2025", org: "INSS - Superintendência Regional", object: "Contratação de serviços de limpeza e conservação", value: "R$ 1.450.000", deadline: "30 Mar 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "yellow", portal: "comprasgov" },
-  { id: "PE 041/2025", org: "TRF - 3ª Região", object: "Fornecimento de mobiliário corporativo", value: "R$ 890.000", deadline: "01 Abr 2025", modalidade: "Pregão Eletrônico", status: "lido", risk: "green", portal: "bll" },
-  { id: "CC 012/2025", org: "Universidade Federal de SP", object: "Serviços de desenvolvimento de software", value: "R$ 3.200.000", deadline: "03 Abr 2025", modalidade: "Concorrência", status: "favorito", risk: "red", portal: "comprassp" },
-  { id: "PE 052/2025", org: "Marinha do Brasil", object: "Material de expediente e suprimentos de informática", value: "R$ 420.000", deadline: "05 Abr 2025", modalidade: "Pregão Eletrônico", status: "lido", risk: "green", portal: "comprasgov" },
-  { id: "PE 061/2025", org: "Prefeitura de Campinas", object: "Contratação de sistema de gestão escolar", value: "R$ 780.000", deadline: "07 Abr 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "yellow", portal: "bll" },
-  { id: "PE 073/2025", org: "Secretaria de Saúde - SP", object: "Aquisição de medicamentos hospitalares", value: "R$ 5.100.000", deadline: "10 Abr 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "green", portal: "comprassp" },
+  { id: "PE 045/2025", org: "Ministério da Saúde", object: "Aquisição de equipamentos de TI - Servidores e Storage", value: "R$ 2.800.000", deadline: "28 Mar 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "green", portal: "comprasgov", url: "https://www.gov.br/compras/pt-br" },
+  { id: "PE 038/2025", org: "INSS - Superintendência Regional", object: "Contratação de serviços de limpeza e conservação", value: "R$ 1.450.000", deadline: "30 Mar 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "yellow", portal: "comprasgov", url: "https://www.gov.br/compras/pt-br" },
+  { id: "PE 041/2025", org: "TRF - 3ª Região", object: "Fornecimento de mobiliário corporativo", value: "R$ 890.000", deadline: "01 Abr 2025", modalidade: "Pregão Eletrônico", status: "lido", risk: "green", portal: "bll", url: "https://bll.org.br" },
+  { id: "CC 012/2025", org: "Universidade Federal de SP", object: "Serviços de desenvolvimento de software", value: "R$ 3.200.000", deadline: "03 Abr 2025", modalidade: "Concorrência", status: "favorito", risk: "red", portal: "comprassp", url: "https://www.bec.sp.gov.br" },
+  { id: "PE 052/2025", org: "Marinha do Brasil", object: "Material de expediente e suprimentos de informática", value: "R$ 420.000", deadline: "05 Abr 2025", modalidade: "Pregão Eletrônico", status: "lido", risk: "green", portal: "comprasgov", url: "https://www.gov.br/compras/pt-br" },
+  { id: "PE 061/2025", org: "Prefeitura de Campinas", object: "Contratação de sistema de gestão escolar", value: "R$ 780.000", deadline: "07 Abr 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "yellow", portal: "bll", url: "https://bll.org.br" },
+  { id: "PE 073/2025", org: "Secretaria de Saúde - SP", object: "Aquisição de medicamentos hospitalares", value: "R$ 5.100.000", deadline: "10 Abr 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "green", portal: "comprassp", url: "https://www.bec.sp.gov.br" },
 ];
 
 const riskColors = {
