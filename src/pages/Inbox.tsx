@@ -3,14 +3,14 @@ import {
   Inbox as InboxIcon,
   Clock,
   Building2,
-  ArrowUpRight,
   Star,
   StarOff,
-  Filter,
   X,
   Globe,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 type Portal = "todos" | "comprasgov" | "bll" | "comprassp";
@@ -164,10 +164,35 @@ export default function Inbox() {
             </div>
 
             <div className="flex flex-col items-center gap-2 shrink-0">
-              <button onClick={(ev) => { ev.stopPropagation(); toggleFav(e.id); }} className="text-muted-foreground hover:text-warning transition-colors">
-                {e.status === "favorito" ? <Star className="w-4 h-4 text-warning fill-warning" /> : <StarOff className="w-4 h-4" />}
-              </button>
-              <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+              <TooltipProvider delayDuration={150}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={(ev) => { ev.stopPropagation(); toggleFav(e.id); }}
+                      className="text-muted-foreground hover:text-warning transition-colors"
+                      aria-label="Favoritar edital"
+                    >
+                      {e.status === "favorito" ? <Star className="w-4 h-4 text-warning fill-warning" /> : <StarOff className="w-4 h-4" />}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent side="left">{e.status === "favorito" ? "Remover dos favoritos" : "Favoritar"}</TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="sm"
+                      onClick={(ev) => { ev.stopPropagation(); window.open(e.url, "_blank", "noopener,noreferrer"); }}
+                      className="h-8 px-2.5 gap-1.5 bg-accent/15 text-accent hover:bg-accent/25 border border-accent/30"
+                      variant="ghost"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span className="text-xs font-medium">Participar</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="left">Abrir no portal {portalLabel[e.portal]}</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
         ))}
