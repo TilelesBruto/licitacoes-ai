@@ -28,12 +28,6 @@ interface Edital {
   url: string;
 }
 
-const portalUrls: Record<string, string> = {
-  comprasgov: "https://www.gov.br/compras",
-  bll: "https://bll.org.br",
-  comprassp: "https://www.bec.sp.gov.br",
-};
-
 const portals: { key: Portal; label: string }[] = [
   { key: "todos", label: "Todos" },
   { key: "comprasgov", label: "Compras.gov" },
@@ -54,13 +48,90 @@ const portalLabel: Record<string, string> = {
 };
 
 const editais: Edital[] = [
-  { id: "PE 045/2025", org: "Ministério da Saúde", object: "Aquisição de equipamentos de TI - Servidores e Storage", value: "R$ 2.800.000", deadline: "28 Mar 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "green", portal: "comprasgov", url: "https://www.gov.br/compras/pt-br" },
-  { id: "PE 038/2025", org: "INSS - Superintendência Regional", object: "Contratação de serviços de limpeza e conservação", value: "R$ 1.450.000", deadline: "30 Mar 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "yellow", portal: "comprasgov", url: "https://www.gov.br/compras/pt-br" },
-  { id: "PE 041/2025", org: "TRF - 3ª Região", object: "Fornecimento de mobiliário corporativo", value: "R$ 890.000", deadline: "01 Abr 2025", modalidade: "Pregão Eletrônico", status: "lido", risk: "green", portal: "bll", url: "https://bll.org.br" },
-  { id: "CC 012/2025", org: "Universidade Federal de SP", object: "Serviços de desenvolvimento de software", value: "R$ 3.200.000", deadline: "03 Abr 2025", modalidade: "Concorrência", status: "favorito", risk: "red", portal: "comprassp", url: "https://www.bec.sp.gov.br" },
-  { id: "PE 052/2025", org: "Marinha do Brasil", object: "Material de expediente e suprimentos de informática", value: "R$ 420.000", deadline: "05 Abr 2025", modalidade: "Pregão Eletrônico", status: "lido", risk: "green", portal: "comprasgov", url: "https://www.gov.br/compras/pt-br" },
-  { id: "PE 061/2025", org: "Prefeitura de Campinas", object: "Contratação de sistema de gestão escolar", value: "R$ 780.000", deadline: "07 Abr 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "yellow", portal: "bll", url: "https://bll.org.br" },
-  { id: "PE 073/2025", org: "Secretaria de Saúde - SP", object: "Aquisição de medicamentos hospitalares", value: "R$ 5.100.000", deadline: "10 Abr 2025", modalidade: "Pregão Eletrônico", status: "novo", risk: "green", portal: "comprassp", url: "https://www.bec.sp.gov.br" },
+  {
+    id: "PE 90007/2025",
+    org: "FNDE",
+    object: "Registro de preço nacional para aquisição de dispositivos de tecnologia da informação para uso educacional",
+    value: "R$ 2.800.000",
+    deadline: "28 Mar 2025",
+    modalidade: "Pregão Eletrônico",
+    status: "novo",
+    risk: "green",
+    portal: "comprasgov",
+    url: "https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/acoes/compras-governamentais/licitacoes/pregao-para-registro-de-preco-nacional/2025/pregao-eletronico-no-90007-2025-registro-de-preco-nacional-para-aquisicao-de-dispositivos-de-tecnologia-da-informacao-para-uso-educacional",
+  },
+  {
+    id: "PE 90151/2025",
+    org: "INSS - Administração Central",
+    object: "Locação de sistema integrado de vigilância eletrônica, equipamentos e softwares",
+    value: "R$ 1.450.000",
+    deadline: "30 Mar 2025",
+    modalidade: "Pregão Eletrônico",
+    status: "novo",
+    risk: "yellow",
+    portal: "comprasgov",
+    url: "https://www.gov.br/inss/pt-br/acesso-a-informacao/licitacoes-e-contratos/licitacoes-administracao-central-em-brasilia-df/pregao-eletronico/2025/pregao-eletronico-no-90151-2025",
+  },
+  {
+    id: "SPE 036/2025",
+    org: "Fundação de Apoio à Pesquisa e à Extensão",
+    object: "Processo público com documentos, mensagens e impugnações no portal BLL Compras",
+    value: "R$ 890.000",
+    deadline: "01 Abr 2025",
+    modalidade: "Pregão Eletrônico",
+    status: "lido",
+    risk: "green",
+    portal: "bll",
+    url: "https://bllcompras.com/Process/ProcessView?param1=%5Bgkz%5Dlgl5maJ3xIDLH55O6ax0AqIoeNcVuZhXcau3U_qD_IfGGTIP57UXuKExpLgg7zhDuhrSJSh7vQgbGIwo1jiN0C2ocgRAYReit6Nxu_o8LEw%3D",
+  },
+  {
+    id: "OC 010101000012015OC00029",
+    org: "Assembleia Legislativa de SP",
+    object: "Oferta de compra com itens negociados pelo valor total no portal BEC",
+    value: "R$ 3.200.000",
+    deadline: "03 Abr 2025",
+    modalidade: "Pregão Eletrônico",
+    status: "favorito",
+    risk: "red",
+    portal: "comprassp",
+    url: "https://www.bec.sp.gov.br/bec_pregao_UI/OC/Pregao_OC_Item.aspx?OC=010101000012015OC00029&chave=",
+  },
+  {
+    id: "PE 90002/2025",
+    org: "Pagadoria de Pessoal da Marinha",
+    object: "Serviço de TIC para desenvolvimento, manutenção e sustentação de software para o SISPAG",
+    value: "R$ 420.000",
+    deadline: "05 Abr 2025",
+    modalidade: "Pregão Eletrônico",
+    status: "lido",
+    risk: "green",
+    portal: "comprasgov",
+    url: "https://comprasnet.gov.br/ConsultaLicitacoes/download/download_editais_detalhe.asp?coduasg=773202&modprp=5&numprp=900022025",
+  },
+  {
+    id: "PESRP011-25",
+    org: "Consórcio Público Interfederativo de Saúde do Extremo Sul da Bahia",
+    object: "Processo público com informações, lotes e documentos no portal BLL Compras",
+    value: "R$ 780.000",
+    deadline: "07 Abr 2025",
+    modalidade: "Pregão Eletrônico",
+    status: "novo",
+    risk: "yellow",
+    portal: "bll",
+    url: "https://bllcompras.com/Process/ProcessView?param1=%5Bgkz%5DjeWgKZZY1jIVQzz_MZLZrC4X2X03Fl6H6c6Kw8tv0jhucnl0iKSnYwtVZ22m1aS712_i2gUQVZJdkDJaB05Mc1Hbz_m2tpYidtw42ItMBs4%3D",
+  },
+  {
+    id: "OC 102128100582023OC00111",
+    org: "Secretaria de Desenvolvimento Econômico - SP",
+    object: "Oferta de compra com itens negociados pelo valor total no portal BEC",
+    value: "R$ 5.100.000",
+    deadline: "10 Abr 2025",
+    modalidade: "Pregão Eletrônico",
+    status: "novo",
+    risk: "green",
+    portal: "comprassp",
+    url: "https://www.bec.sp.gov.br/bec_pregao_UI/OC/Pregao_OC_Item.aspx?OC=102128100582023OC00111&a=10211&chave=",
+  },
 ];
 
 const riskColors = {
